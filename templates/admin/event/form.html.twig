@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if edit %}
+        Éditer un événement
+    {% else %}
+        Créer un événement
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="mb-4">
+                {% if edit %}
+                    ✏️ Éditer l'événement : {{ event.titre }}
+                {% else %}
+                    ➕ Créer un nouvel événement
+                {% endif %}
+            </h1>
+
+            {{ form_start(form) }}
+                <div class="mb-3">
+                    {{ form_label(form.titre, 'Titre de l\'événement') }}
+                    {{ form_widget(form.titre, {attr: {class: 'form-control', placeholder: 'Ex: Conférence Symfony'}}) }}
+                    {{ form_errors(form.titre) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.description, 'Description') }}
+                    {{ form_widget(form.description, {attr: {class: 'form-control', rows: 4, placeholder: 'Détails de l\'événement...'}}) }}
+                    {{ form_errors(form.description) }}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            {{ form_label(form.date_event, 'Date et heure') }}
+                            {{ form_widget(form.date_event, {attr: {class: 'form-control'}}) }}
+                            {{ form_errors(form.date_event) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            {{ form_label(form.lieu, 'Lieu') }}
+                            {{ form_widget(form.lieu, {attr: {class: 'form-control', placeholder: 'Ex: En ligne, Tunis...'}}) }}
+                            {{ form_errors(form.lieu) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.places, 'Nombre de places (optionnel)') }}
+                    {{ form_widget(form.places, {attr: {class: 'form-control', type: 'number', placeholder: '50'}}) }}
+                    {{ form_errors(form.places) }}
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="{{ path('app_admin_event_list') }}" class="btn btn-secondary">❌ Annuler</a>
+                    <button type="submit" class="btn btn-primary">
+                        {% if edit %}
+                            💾 Mettre à jour
+                        {% else %}
+                            ✅ Créer
+                        {% endif %}
+                    </button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

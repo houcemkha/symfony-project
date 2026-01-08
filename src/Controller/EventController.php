@@ -25,7 +25,7 @@ class EventController extends AbstractController
             $reservationCount = $result['reservationCount'];
             $chartData[$eventId] = $reservationCount;
         }
-        return $this->render('dashboard/eventdashboard.html.twig', [
+        return $this->render('dashboard/eventdashboard2.html.twig', [
             'events' => $eventRepository->findAll(),
             'chartData' => $chartData,
         ]);
